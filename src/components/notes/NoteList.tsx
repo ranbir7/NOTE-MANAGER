@@ -6,7 +6,7 @@ import { Button } from '@/src/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/src/components/ui/card';
 import { Skeleton } from '@/src/components/ui/skeleton';
 import { ConfirmDialog } from '@/src/components/ConfirmDialog';
-import { EditNoteModal } from '@/src/components/EditNoteModal';
+import { EditNoteModal } from '@/src/components/EditNote';
 import { NoteForm } from '@/src/components/notes/NoteForm';
 import { ErrorBoundary } from '@/src/components/ErrorBoundary';
 import { toast } from 'sonner';
