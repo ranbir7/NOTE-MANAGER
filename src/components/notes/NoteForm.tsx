@@ -109,9 +109,8 @@ export function NoteForm({ onNoteAdded }: NoteFormProps) {
             placeholder="Enter note content"
             rows={4}
             aria-describedby={errors.body ? 'body-error' : undefined}
-            className={`w-full px-3 py-2 border bg-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 resize-none ${
-              errors.body ? 'border-destructive' : 'border-input'
-            }`}
+            className={`w-full px-3 py-2 border bg-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 resize-none ${errors.body ? 'border-destructive' : 'border-input'
+              }`}
           />
           {errors.body && (
             <p id="body-error" role="alert" className="mt-1 text-xs text-destructive">
