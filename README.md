@@ -1,95 +1,141 @@
 # Note Manager
 
-A **Secure Task & Note Manager** built with Next.js (App Router), TypeScript, Tailwind CSS, and shadcn/ui.
+A secure, full-featured note management application built with Next.js 15, TypeScript, and Tailwind CSS. Create, read, update, and delete notes with real-time search, input validation, XSS protection, and a clean, responsive UI.
 
-## Live Demo
+**Live Demo → https://note-manager-kb1h-iwwnwbv35-ranbir7s-projects.vercel.app**
 
-> Deploy to Vercel and add your URL here.
+---
 
 ## Features
 
-| Feature | Implementation |
-|---|---|
-| Create notes | Validated form with Zod schema |
-| Read notes | Fetched from JSONPlaceholder `/posts`, real-time search |
-| Update notes | Modal editor with PUT request |
-| Delete notes | Confirmation dialog before DELETE request |
-| Input validation | Zod schema-based, client-side |
-| XSS sanitization | `isomorphic-dompurify` strips all HTML tags |
-| Error handling | React Error Boundary + toast notifications |
-| Loading states | Skeleton loaders |
-| Empty states | Contextual empty views for no-data and no-search-results |
-| Responsive design | Mobile-first Tailwind layout |
-| Toast notifications | `sonner` for CRUD feedback |
+### Core
+- **Create** — Add notes with a title and body via a validated form
+- **Read** — Fetch and display notes from the JSONPlaceholder API with skeleton loading states
+- **Update** — Edit any note via a modal with pre-filled fields and live validation
+- **Delete** — Remove notes with a confirmation dialog to prevent accidental deletion
+- **Search** — Real-time filtering across note titles and body content
+
+### Security
+- **Schema validation** — All form inputs validated with Zod before any API call is made
+- **XSS sanitization** — User-generated content stripped of all HTML tags using `isomorphic-dompurify` before submission
+- **Error boundaries** — React Error Boundary wraps the main UI to catch and handle unexpected rendering errors gracefully
+- **API error handling** — Every fetch call has try/catch with user-facing toast notifications on failure
+
+### UI/UX
+- **Skeleton loaders** — Shown during initial data fetch instead of blank screens
+- **Toast notifications** — Success and error feedback for every CRUD action via `sonner`
+- **Empty states** — Distinct views for "no notes yet" and "no search results"
+- **Responsive layout** — Mobile-first design that works across all screen sizes
+- **Accessible** — Proper ARIA labels, roles, and form associations throughout
+
+---
 
 ## Tech Stack
 
-- **Next.js 15** — App Router, Server/Client Components
-- **TypeScript** — Full type safety
-- **Tailwind CSS v4** — Utility-first styling
-- **shadcn/ui** — Accessible component primitives
-- **Zod** — Schema-based input validation
-- **isomorphic-dompurify** — XSS sanitization
-- **sonner** — Toast notifications
+| Technology --> Purpose |
+|--------------|---------|
+| Next.js 15 (App Router) --> Framework, routing, server/client components |
+| TypeScript --> Full type safety across the entire codebase |
+| Tailwind CSS v4 --> Utility-first styling |
+| shadcn/ui --> Accessible, unstyled component primitives |
+| Zod --> Schema-based input validation with TypeScript inference |
+| isomorphic-dompurify --> XSS sanitization for user-generated content |
+| sonner --> Toast notification system |
+| JSONPlaceholder --> Mock REST API (`/posts` endpoint) |
 
-## Setup
+---
+
+## Project Structure
+
+```
+note-manager/
+├── app/
+│   ├── layout.tsx              # Root layout with font setup and Toaster
+│   ├── page.tsx                # Home page (server component)
+│   └── globals.css             # Tailwind imports and CSS theme tokens
+├── src/
+│   ├── components/
+│   │   ├── notes/
+│   │   │   ├── NoteList.tsx    # Main list with search, edit, delete
+│   │   │   ├── NoteForm.tsx    # Create note form with validation
+│   │   │   └── index.ts        # Barrel exports
+│   │   ├── ui/
+│   │   │   ├── button.tsx      # Button component (shadcn)
+│   │   │   ├── card.tsx        # Card component (shadcn)
+│   │   │   ├── input.tsx       # Input component (shadcn)
+│   │   │   └── skeleton.tsx    # Skeleton loader (shadcn)
+│   │   ├── ConfirmDialog.tsx   # Delete confirmation modal
+│   │   ├── EditNote.tsx   # Edit note modal
+│   │   └── ErrorBoundary.tsx   # React error boundary (class component)
+│   ├── lib/
+│   │   ├── utils.ts            # cn() helper for class merging
+│   │   └── sanitize.ts         # DOMPurify wrapper for XSS protection
+│   └── types/
+│       └── note.ts             # Note interface
+```
+
+---
+
+## Getting Started
+
+### Prerequisites
+- Node.js 18+
+- npm
+
+### Installation
 
 ```bash
-# 1. Clone & install
-git clone <repo-url>
-cd note-manager
+# Clone the repository
+git clone https://github.com/ranbir7/NOTE-MANAGER.git
+cd NOTE-MANAGER
+
+# Install dependencies
 npm install
 
-# 2. Install the sanitization dependency
-npm install isomorphic-dompurify
-npm install -D @types/dompurify
-
-# 3. Run development server
+# Start the development server
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-## Folder Structure
-
-```
-src/
-  components/
-    notes/
-      NoteList.tsx      # Main list, search, delete
-      NoteForm.tsx      # Create note form
-      index.ts          # Barrel exports
-    ui/
-      button.tsx
-      card.tsx
-      input.tsx
-      skeleton.tsx
-    ConfirmDialog.tsx   # Delete confirmation modal
-    EditNoteModal.tsx   # Edit note modal
-    ErrorBoundary.tsx   # React error boundary
-  lib/
-    utils.ts            # cn() helper
-    sanitize.ts         # DOMPurify wrapper
-  types/
-    note.ts             # Note interface
-app/
-  page.tsx              # Home page
-  layout.tsx            # Root layout with Toaster
-  globals.css           # Tailwind + theme tokens
-```
-
-## Technical Decisions
-
-- **Zod** was chosen for schema validation because it provides TypeScript-first type inference and clear error messages.
-- **isomorphic-dompurify** sanitizes all user input before it hits the API to prevent XSS, stripping all HTML/script tags.
-- **React Error Boundary** wraps the main list to gracefully handle any unexpected rendering errors.
-- **Optimistic updates** are applied locally after successful API responses since JSONPlaceholder doesn't persist data.
-- **Sonner** was chosen over react-hot-toast for its polished UI and `richColors` support.
-
-## Deployment
+### Build for Production
 
 ```bash
 npm run build
+npm start
 ```
 
-Deploy via [Vercel](https://vercel.com) by importing the GitHub repository.
+---
+
+## Technical Decisions
+
+**Why Zod for validation?**
+Zod provides TypeScript-first schema validation with automatic type inference. Defining a schema once gives both runtime validation and compile-time types — no duplication. Error messages are structured and easy to map to specific form fields.
+
+**Why isomorphic-dompurify for sanitization?**
+User input should never be trusted. Even though JSONPlaceholder doesn't persist data, sanitizing before every API call is the correct habit. `isomorphic-dompurify` works in both server and browser environments (important for Next.js SSR), and strips all HTML tags and attributes, preventing XSS attacks if the content were ever rendered as HTML.
+
+**Why a React Error Boundary?**
+React's built-in error handling only works via class components with `getDerivedStateFromError`. The Error Boundary wraps the entire notes UI so that if any unexpected rendering error occurs, users see a friendly fallback screen instead of a blank white page or a crash.
+
+**Why client-side fetch instead of server-side?**
+JSONPlaceholder is a public mock API with no authentication. Since notes need to be interactive (create, edit, delete update the UI instantly), managing state on the client with `useState` and `useEffect` is the pragmatic choice. A real application with a proper backend would use server components and server actions for data fetching.
+
+**Why sonner for toasts?**
+Sonner has a clean, minimal design that fits the app's aesthetic, supports `richColors` for semantic success/error states, and has a simple API (`toast.success()`, `toast.error()`) with no configuration overhead.
+
+**JSONPlaceholder limitations**
+JSONPlaceholder is a read-only mock API. POST, PUT, and DELETE requests return simulated responses but don't actually persist data. This means:
+- Created notes appear in the UI but are lost on page refresh
+- Notes with IDs above 100 (newly created ones) return a 404 on PUT — handled gracefully by updating state locally
+- Delete requests return 200 but the note still exists on the server
+
+This is expected behaviour for a mock API and is handled appropriately in the codebase.
+
+---
+
+## Deployment
+
+The application is deployed on Vercel with zero configuration. Every push to the `main` branch triggers an automatic redeployment.
+
+[Live Demo](https://note-manager-kb1h-6jif0b6jh-ranbir7s-projects.vercel.app/)
