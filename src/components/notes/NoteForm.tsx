@@ -7,6 +7,7 @@ import { Note } from '@/src/types/note';
 import { Button } from '@/src/components/ui/button';
 import { Input } from '@/src/components/ui/input';
 import { sanitize } from '@/src/lib/sanitize';
+import { Textarea } from '../ui/textarea';
 
 const noteSchema = z.object({
   title: z.string().min(1, 'Title is required').max(100, 'Title must be less than 100 characters'),
@@ -102,15 +103,14 @@ export function NoteForm({ onNoteAdded }: NoteFormProps) {
           <label htmlFor="body" className="block text-xs font-semibold tracking-widest uppercase text-muted-foreground mb-2">
             Body
           </label>
-          <textarea
+          <Textarea
             id="body"
             value={body}
             onChange={(e) => setBody(e.target.value)}
             placeholder="Enter note content"
             rows={4}
             aria-describedby={errors.body ? 'body-error' : undefined}
-            className={`w-full px-3 py-2 border bg-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 resize-none ${errors.body ? 'border-destructive' : 'border-input'
-              }`}
+            className={errors.body ? 'border-destructive' : ''}
           />
           {errors.body && (
             <p id="body-error" role="alert" className="mt-1 text-xs text-destructive">
