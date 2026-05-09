@@ -1,36 +1,95 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Note Manager
 
-## Getting Started
+A **Secure Task & Note Manager** built with Next.js (App Router), TypeScript, Tailwind CSS, and shadcn/ui.
 
-First, run the development server:
+## Live Demo
+
+> Deploy to Vercel and add your URL here.
+
+## Features
+
+| Feature | Implementation |
+|---|---|
+| Create notes | Validated form with Zod schema |
+| Read notes | Fetched from JSONPlaceholder `/posts`, real-time search |
+| Update notes | Modal editor with PUT request |
+| Delete notes | Confirmation dialog before DELETE request |
+| Input validation | Zod schema-based, client-side |
+| XSS sanitization | `isomorphic-dompurify` strips all HTML tags |
+| Error handling | React Error Boundary + toast notifications |
+| Loading states | Skeleton loaders |
+| Empty states | Contextual empty views for no-data and no-search-results |
+| Responsive design | Mobile-first Tailwind layout |
+| Toast notifications | `sonner` for CRUD feedback |
+
+## Tech Stack
+
+- **Next.js 15** — App Router, Server/Client Components
+- **TypeScript** — Full type safety
+- **Tailwind CSS v4** — Utility-first styling
+- **shadcn/ui** — Accessible component primitives
+- **Zod** — Schema-based input validation
+- **isomorphic-dompurify** — XSS sanitization
+- **sonner** — Toast notifications
+
+## Setup
 
 ```bash
+# 1. Clone & install
+git clone <repo-url>
+cd note-manager
+npm install
+
+# 2. Install the sanitization dependency
+npm install isomorphic-dompurify
+npm install -D @types/dompurify
+
+# 3. Run development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Folder Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+src/
+  components/
+    notes/
+      NoteList.tsx      # Main list, search, delete
+      NoteForm.tsx      # Create note form
+      index.ts          # Barrel exports
+    ui/
+      button.tsx
+      card.tsx
+      input.tsx
+      skeleton.tsx
+    ConfirmDialog.tsx   # Delete confirmation modal
+    EditNoteModal.tsx   # Edit note modal
+    ErrorBoundary.tsx   # React error boundary
+  lib/
+    utils.ts            # cn() helper
+    sanitize.ts         # DOMPurify wrapper
+  types/
+    note.ts             # Note interface
+app/
+  page.tsx              # Home page
+  layout.tsx            # Root layout with Toaster
+  globals.css           # Tailwind + theme tokens
+```
 
-## Learn More
+## Technical Decisions
 
-To learn more about Next.js, take a look at the following resources:
+- **Zod** was chosen for schema validation because it provides TypeScript-first type inference and clear error messages.
+- **isomorphic-dompurify** sanitizes all user input before it hits the API to prevent XSS, stripping all HTML/script tags.
+- **React Error Boundary** wraps the main list to gracefully handle any unexpected rendering errors.
+- **Optimistic updates** are applied locally after successful API responses since JSONPlaceholder doesn't persist data.
+- **Sonner** was chosen over react-hot-toast for its polished UI and `richColors` support.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Deployment
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+npm run build
+```
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Deploy via [Vercel](https://vercel.com) by importing the GitHub repository.
