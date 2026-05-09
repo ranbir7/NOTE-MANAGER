@@ -2,7 +2,7 @@
 
 A secure, full-featured note management application built with Next.js 15, TypeScript, and Tailwind CSS. Create, read, update, and delete notes with real-time search, input validation, XSS protection, and a clean, responsive UI.
 
-**Live Demo → https://note-manager-kb1h-iwwnwbv35-ranbir7s-projects.vercel.app**
+**Live Demo → https://note-manager-kb1h-k2wr66qd7-ranbir7s-projects.vercel.app/**
 
 ---
 
@@ -31,10 +31,10 @@ A secure, full-featured note management application built with Next.js 15, TypeS
 ---
 
 ## Tech Stack
-
+```
 | Technology --> Purpose |
 |--------------|---------|
-| Next.js 15 (App Router) --> Framework, routing, server/client components |
+| Next.js 15  --> Framework, routing, server/client components |
 | TypeScript --> Full type safety across the entire codebase |
 | Tailwind CSS v4 --> Utility-first styling |
 | shadcn/ui --> Accessible, unstyled component primitives |
@@ -44,7 +44,7 @@ A secure, full-featured note management application built with Next.js 15, TypeS
 | JSONPlaceholder --> Mock REST API (`/posts` endpoint) |
 
 ---
-
+```
 ## Project Structure
 
 ```
@@ -77,10 +77,6 @@ note-manager/
 ---
 
 ## Getting Started
-
-### Prerequisites
-- Node.js 18+
-- npm
 
 ### Installation
 
