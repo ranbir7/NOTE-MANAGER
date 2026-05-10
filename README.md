@@ -2,7 +2,7 @@
 
 A secure, full-featured note management application built with Next.js 15, TypeScript, and Tailwind CSS. Create, read, update, and delete notes with real-time search, input validation, XSS protection, and a clean, responsive UI.
 
-**Live Demo → https://note-manager-kb1h-k2wr66qd7-ranbir7s-projects.vercel.app/**
+**Live Demo --> https://note-manager-kb1h-lgcp4g8lf-ranbir7s-projects.vercel.app/**
 
 ---
 
@@ -134,4 +134,4 @@ This is expected behaviour for a mock API and is handled appropriately in the co
 
 The application is deployed on Vercel with zero configuration. Every push to the `main` branch triggers an automatic redeployment.
 
-[Live Demo](https://note-manager-kb1h-6jif0b6jh-ranbir7s-projects.vercel.app/)
+[Live Demo]((https://note-manager-kb1h-lgcp4g8lf-ranbir7s-projects.vercel.app/))
